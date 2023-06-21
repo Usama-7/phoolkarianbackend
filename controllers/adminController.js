@@ -1,19 +1,14 @@
-import userModel from "../models/userModel.js"
-import productModel from "../models/productModel.js"
-import contactModel from "../models/contactModel.js"
+const userModel = require("../models/userModel.js");
+const productModel = require("../models/productModel.js");
+const contactModel = require("../models/contactModel.js");
 
-
-
-
-export const adminController = (req,res) =>{
-    res.send("You are admin")
-  }
+const adminController = (req, res) => {
+  res.send("You are admin");
+};
 
 // Configure Multer storage
 
-
-
-export const addProduct = async (req, res) => {
+const addProduct = async (req, res) => {
   try {
     const { title, disc, price, catagory } = req.body;
     const { filename } = req.file;
@@ -36,9 +31,8 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
-  // Fetch all images endpoint
-  export const productList = async (req, res) => {
+// Fetch all images endpoint
+const productList = async (req, res) => {
   try {
     const images = await productModel.find();
     res.status(200).json(images);
@@ -47,115 +41,97 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
-  // getting Data from MongoDb
-
-export const productList1 = async(req, res)=>{
-  let nData = await productModel.find();        
-  if(nData.length>0){
-      res.send(nData)
-  }else{
-      res.send({msg: "No record available here"})
+// getting Data from MongoDb
+const productList1 = async (req, res) => {
+  let nData = await productModel.find();
+  if (nData.length > 0) {
+    res.send(nData);
+  } else {
+    res.send({ msg: "No record available here" });
   }
-}
-  
+};
 
 // deleting added note
-export const deleteProduct = async(req,res)=>{ 
-  
-  
-
-  let delUser = await productModel.deleteOne({_id: req.params.id})
-  res.send(delUser)
-
-}
+const deleteProduct = async (req, res) => {
+  let delUser = await productModel.deleteOne({ _id: req.params.id });
+  res.send(delUser);
+};
 
 // Getting note from MongoDb on the basis of Id
-export const singleProduct = async(req,res)=>
-{
-    let result = await productModel.findOne({_id: req.params.id})
-    console.log("result_______wrong id ____+++___", result)
-    
-    res.send(result) 
-   
-    
-}
+const singleProduct = async (req, res) => {
+  let result = await productModel.findOne({ _id: req.params.id });
+  console.log("result_______wrong id ____+++___", result);
+  res.send(result);
+};
 
 // updating product
-
-export const updateProduct = async(req,res)=>{
-  let result = await productModel.updateOne(        
-          {_id: req.params.id},
-          {$set: req.body}                  
-  )
-  res.send(result)
-}
-
+const updateProduct = async (req, res) => {
+  let result = await productModel.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+};
 
 // getting Data from MongoDb
-
-export const userList = async(req, res)=>{
-  let nData = await userModel.find();        
-  if(nData.length>0){
-      res.send(nData)
-  }else{
-      res.send({msg: "No record available here"})
+const userList = async (req, res) => {
+  let nData = await userModel.find();
+  if (nData.length > 0) {
+    res.send(nData);
+  } else {
+    res.send({ msg: "No record available here" });
   }
-}
-
-
+};
 
 // deleting added note
-export const deleteUser = async(req,res)=>{ 
-  let delUser = await userModel.deleteOne({_id: req.params.id})
-  res.send(delUser)
-
-}
-
-
+const deleteUser = async (req, res) => {
+  let delUser = await userModel.deleteOne({ _id: req.params.id });
+  res.send(delUser);
+};
 
 // Getting note from MongoDb on the basis of Id
-export const singleUser = async(req,res)=>
-{
-    let result = await userModel.findOne({_id: req.params.id})
-    res.send(result) 
-}
-
+const singleUser = async (req, res) => {
+  let result = await userModel.findOne({ _id: req.params.id });
+  res.send(result);
+};
 
 // updating user
-
-export const updateUser = async(req,res)=>{
-  let result = await userModel.updateOne(        
-          {_id: req.params.id},
-          {$set: req.body}                  
-  )
-  res.send(result)
-}
-
+const updateUser = async (req, res) => {
+  let result = await userModel.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  res.send(result);
+};
 
 // getting Data from MongoDb
-
-export const userMessages = async(req, res)=>{
-  let nData = await contactModel.find();        
-  if(nData.length>0){
-      res.send(nData)
-  }else{
-      res.send({msg: "No record available here"})
+const userMessages = async (req, res) => {
+  let nData = await contactModel.find();
+  if (nData.length > 0) {
+    res.send(nData);
+  } else {
+    res.send({ msg: "No record available here" });
   }
-}
-
+};
 
 // deleting added note
-export const deleteMessage = async(req,res)=>{ 
-  let delUser = await contactModel.deleteOne({_id: req.params.id})
-  res.send(delUser)
+const deleteMessage = async (req, res) => {
+  let delUser = await contactModel.deleteOne({ _id: req.params.id });
+  res.send(delUser);
+};
 
-}
-
-
-
-
-
-
-
-
+module.exports = {
+  adminController,
+  addProduct,
+  productList,
+  productList1,
+  deleteProduct,
+  singleProduct,
+  updateProduct,
+  userList,
+  deleteUser,
+  singleUser,
+  updateUser,
+  userMessages,
+  deleteMessage
+};

@@ -1,27 +1,16 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-
-const checkoutSchema = new mongoose.Schema(
-    
+const checkoutSchema = new mongoose.Schema({
+  userE: String,
+  tprice: String,
+  products: [
     {
-        userE: String,
-        tprice: String,
+      title: String,
+      qnty: String,
+      userE: String,
+      updatedAt: String,
+    }
+  ]
+});
 
-    products:[
-
-            {
-                title: String,
-                qnty: String,
-                userE: String,
-                updatedAt: String,      
-            }
-        ]
-        
-
-        }
-    
-
-
-)
-
-export default mongoose.model("checkout",checkoutSchema)
+module.exports = mongoose.model("checkout", checkoutSchema);
